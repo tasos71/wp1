@@ -14,7 +14,7 @@ global:
     main_cidr: "10.5.0.0/16"
     subnet_name_eu_1: "test-tech_task-wp01--rg_eu_west-subnet1"
     subnet1: "10.5.1.0/24"
-    subnet_name_eu_2: "test-tech_task-wp01--subnet_eu_west-subnet2"
+    subnet_name_eu_2: "test-tech_task-wp01--rg_eu_west-subnet2"
     subnet2: "10.5.2.0/24"
     nsg: "test-tech_task-wp01--rg_eu_west-NSG"
     nsg_fileserver: "test-tech_task-wp01--rg_eu_west-NSG-fileserver"
@@ -25,9 +25,9 @@ global:
     location: "westus"
     vnet_name: "tech_task-wp01--vnet_us_west"
     address_prefix_vnet: "10.4.0.0/16"
-    subnet_name_us_1: "test-tech_task-wp01--subnet_us_west-subnet1"
+    subnet_name_us_1: "test-tech_task-wp01--rg_us_west-subnet1"
     subnet1: "10.4.1.0/24"
-    subnet_name_us_2: "test-ech_task-wp01--subnet_us_west-subnet2"
+    subnet_name_us_2: "test-tech_task-wp01--rg_us_west-subnet2"
     subnet2: "10.4.2.0/24"
 #Storage
   storage:
