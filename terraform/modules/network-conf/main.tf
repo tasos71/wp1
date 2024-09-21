@@ -53,7 +53,3 @@ resource "azurerm_virtual_network" "vnet" {
     #security_group   = azurerm_network_security_group.example.id
   }
 }
-
-output "vnetid" {
-  value = azurerm_virtual_network.vnet.id
-}
