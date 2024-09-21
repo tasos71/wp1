@@ -13,3 +13,12 @@ output "vnetid" {
 output "nsgname" {
   value = azurerm_network_security_group.nsg.name
 }
+
+output "subnet1" {
+  value = azurerm_virtual_network.vnet.subnet[0].address_prefixes
+}
+
+output "subnet2" {
+  value = azurerm_virtual_network.vnet.subnet[1].address_prefixes
+}
+

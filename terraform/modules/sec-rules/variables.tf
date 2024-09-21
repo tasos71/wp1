@@ -20,7 +20,7 @@ variable "access"{
 
 variable "protocol"{
   type = string
-  default = "TCP"
+  default = "Tcp"
 }
 
 variable "source_port_range"{
@@ -35,7 +35,7 @@ variable "destination_port_range"{
 
 variable "source_address_prefix"{
   type = string
-  default = "client-test-1"
+  default = "*"
 }
 
 variable "destination_address_prefix"{
@@ -44,11 +44,6 @@ variable "destination_address_prefix"{
 }
 
 variable "description"{
-  type = string
-  default = "client-test-1"
-}
-
-variable "resource_group_name"{
   type = string
   default = "client-test-1"
 }

@@ -13,3 +13,11 @@ output "vnetname" {
 output "nsgname" {
   value = module.eu-network.nsgname
 }
+
+output "subnet1" {
+  value = module.eu-network.subnet1
+}
+
+output "subnet2" {
+  value = module.eu-network.subnet2
+}
