@@ -25,5 +25,5 @@ resource "azurerm_network_security_rule" "sec-rule" {
     destination_address_prefix  = var.destination_address_prefix
     description                 = var.description
     resource_group_name         = var.resource_group_name
-    network_security_group_name = var.resource_group_name
+    network_security_group_name = var.network_security_group_name
 }
