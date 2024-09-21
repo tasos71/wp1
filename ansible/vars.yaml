@@ -23,7 +23,7 @@ global:
   us:
     resource_group: "test-tech_task-wp01--rg_us_west"
     location: "westus"
-    vnet_name: "tech_task-wp01--vnet_us_west"
+    vnet_name: "test-tech_task-wp01--rg_us_west-vnet"
     address_prefix_vnet: "10.4.0.0/16"
     subnet_name_us_1: "test-tech_task-wp01--rg_us_west-subnet1"
     subnet1: "10.4.1.0/24"
