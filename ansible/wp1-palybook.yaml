@@ -14,8 +14,8 @@
 
   tasks:
     - include_role:
-        name: infra_terraform    # Deploy Azure resources
-      vars:
-        cloud_element: "{{ azf.resources }}"
+        name: updateNSG    #  Azure resources
+#      vars:
+#        cloud_element: "{{ azf.resources }}"
         
-    - file_server        # Deploy and configure Azure file server
+#    - file_server        # Deploy and configure Azure file server
