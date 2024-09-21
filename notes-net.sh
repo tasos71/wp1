@@ -1,97 +1,77 @@
 #!/bin/bash
-# Variables (fill in as needed)
-RESOURCE_GROUP_US="tech_task-WP01--RG_US_West"
+
+# Variables
 RESOURCE_GROUP_EU="tech_task-WP01--RG_EU_West"
-LOCATION_US="westus"
+STORAGE_ACCOUNT_NAME="fileshare$(date +%s | cut -c1-5)"  # Shorter, valid storage account name
 LOCATION_EU="westeurope"
-VNET_NAME_US="tech_task-WP01--VNet_US_West"
-VNET_NAME_EU="tech_task-WP01--VNet_EU_West"
-ADDRESS_PREFIX_VNET_US="10.2.0.0/16"
-ADDRESS_PREFIX_VNET_EU="10.3.0.0/16"
+VNET_NAME="tech_task-WP01--VNet_EU_West"
+SUBNET_NAME="tech_task-WP01--Subnet_EU_West1"
+SMB_ENABLED=true   # Set to true or false to enable/disable SMB share creation
+NFS_ENABLED=true   # Set to true or false to enable/disable NFS share creation
 
-# Optional Subnet Variables (leave empty if not needed)
-SUBNET_NAME_US_1="tech_task-WP01--Subnet_US_West01"
-ADDRESS_PREFIX_SUBNET_US_1="10.2.1.0/24"
-SUBNET_NAME_US_2="tech_task-WP01--Subnet_US_West02"
-ADDRESS_PREFIX_SUBNET_US_2="10.2.2.0/24"
+# File Share Names (you can change these)
+SMB_SHARE_NAME="smbshare"
+NFS_SHARE_NAME="nfsshare"
 
-SUBNET_NAME_EU_1="tech_task-WP01--Subnet_EU_West1"
-ADDRESS_PREFIX_SUBNET_EU_1="10.3.1.0/24"
-SUBNET_NAME_EU_2="tech_task-WP01--Subnet_EU_West2"
-ADDRESS_PREFIX_SUBNET_EU_2="10.3.2.0/24"
+# Step 1: Add Microsoft.Storage Service Endpoint to the Subnet (Required for NFS)
+echo "Adding Microsoft.Storage service endpoint to the subnet..."
+az network vnet subnet update \
+  --name "$SUBNET_NAME" \
+  --vnet-name "$VNET_NAME" \
+  --resource-group "$RESOURCE_GROUP_EU" \
+  --service-endpoints "Microsoft.Storage"
 
-# Step 1: Create Resource Groups
-az group create --name $RESOURCE_GROUP_US --location $LOCATION_US
-az group create --name $RESOURCE_GROUP_EU --location $LOCATION_EU
+# Step 2: Create the Storage Account with Private Network Access Only
+echo "Creating storage account with private network access in $LOCATION_EU..."
+az storage account create \
+  --name "$STORAGE_ACCOUNT_NAME" \
+  --resource-group "$RESOURCE_GROUP_EU" \
+  --location "$LOCATION_EU" \
+  --sku Premium_LRS \
+  --kind FileStorage \
+  --default-action Deny  # Deny public access to the storage account
 
-# Step 2: Create VNet in US-West
-az network vnet create \
-  --name $VNET_NAME_US \
-  --resource-group $RESOURCE_GROUP_US \
-  --location $LOCATION_US \
-  --address-prefix $ADDRESS_PREFIX_VNET_US
+# Step 3: Add VNet Rule for Storage Account (Required for NFS)
+echo "Adding VNet rule to restrict access to the storage account..."
+az storage account network-rule add \
+  --resource-group "$RESOURCE_GROUP_EU" \
+  --account-name "$STORAGE_ACCOUNT_NAME" \
+  --vnet-name "$VNET_NAME" \
+  --subnet "$SUBNET_NAME"
 
-# Step 3: Create VNet in West Europe
-az network vnet create \
-  --name $VNET_NAME_EU \
-  --resource-group $RESOURCE_GROUP_EU \
-  --location $LOCATION_EU \
-  --address-prefix $ADDRESS_PREFIX_VNET_EU
+# Step 4: Disable 'Secure Transfer Required' (Required for NFS)
+echo "Disabling 'Secure Transfer Required' for NFS access..."
+az storage account update \
+  --name "$STORAGE_ACCOUNT_NAME" \
+  --resource-group "$RESOURCE_GROUP_EU" \
+  --https-only false  # Disables 'Secure Transfer Required'
 
-# Step 4: Optional Subnet Creation in US-West
-
-# Create US Subnet 1 if variables are provided
-if [[ -n $SUBNET_NAME_US_1 && -n $ADDRESS_PREFIX_SUBNET_US_1 ]]; then
-    az network vnet subnet create \
-      --resource-group $RESOURCE_GROUP_US \
-      --vnet-name $VNET_NAME_US \
-      --name $SUBNET_NAME_US_1 \
-      --address-prefix $ADDRESS_PREFIX_SUBNET_US_1
+# Step 5: Create SMB File Share (Optional)
+if [ "$SMB_ENABLED" = true ]; then
+  echo "Creating SMB file share..."
+  az storage share-rm create \
+    --resource-group "$RESOURCE_GROUP_EU" \
+    --storage-account "$STORAGE_ACCOUNT_NAME" \
+    --name "$SMB_SHARE_NAME" \
+    --quota 100  # Size in GiB
+  echo "SMB file share '$SMB_SHARE_NAME' created."
+else
+  echo "SMB file share creation skipped."
 fi
 
-# Create US Subnet 2 if variables are provided
-if [[ -n $SUBNET_NAME_US_2 && -n $ADDRESS_PREFIX_SUBNET_US_2 ]]; then
-    az network vnet subnet create \
-      --resource-group $RESOURCE_GROUP_US \
-      --vnet-name $VNET_NAME_US \
-      --name $SUBNET_NAME_US_2 \
-      --address-prefix $ADDRESS_PREFIX_SUBNET_US_2
+# Step 6: Create NFS File Share (Optional)
+if [ "$NFS_ENABLED" = true ]; then
+  echo "Creating NFS file share..."
+  az storage share-rm create \
+    --resource-group "$RESOURCE_GROUP_EU" \
+    --storage-account "$STORAGE_ACCOUNT_NAME" \
+    --name "$NFS_SHARE_NAME" \
+    --enabled-protocol NFS \
+    --root-squash NoRootSquash \
+    --quota 100  # Size in GiB
+  echo "NFS file share '$NFS_SHARE_NAME' created."
+else
+  echo "NFS file share creation skipped."
 fi
 
-# Step 5: Optional Subnet Creation in West Europe
-
-# Create EU Subnet 1 if variables are provided
-if [[ -n $SUBNET_NAME_EU_1 && -n $ADDRESS_PREFIX_SUBNET_EU_1 ]]; then
-    az network vnet subnet create \
-      --resource-group $RESOURCE_GROUP_EU \
-      --vnet-name $VNET_NAME_EU \
-      --name $SUBNET_NAME_EU_1 \
-      --address-prefix $ADDRESS_PREFIX_SUBNET_EU_1
-fi
-
-# Create EU Subnet 2 if variables are provided
-if [[ -n $SUBNET_NAME_EU_2 && -n $ADDRESS_PREFIX_SUBNET_EU_2 ]]; then
-    az network vnet subnet create \
-      --resource-group $RESOURCE_GROUP_EU \
-      --vnet-name $VNET_NAME_EU \
-      --name $SUBNET_NAME_EU_2 \
-      --address-prefix $ADDRESS_PREFIX_SUBNET_EU_2
-fi
-
-# Step 6: VNet Peering
-
-# Peering from US VNet to EU VNet
-az network vnet peering create \
-  --name US-to-EU-Peering \
-  --resource-group $RESOURCE_GROUP_US \
-  --vnet-name $VNET_NAME_US \
-  --remote-vnet "/subscriptions/$(az account show --query id -o tsv)/resourceGroups/$RESOURCE_GROUP_EU/providers/Microsoft.Network/virtualNetworks/$VNET_NAME_EU" \
-  --allow-vnet-access
-
-# Peering from EU VNet to US VNet
-az network vnet peering create \
-  --name EU-to-US-Peering \
-  --resource-group $RESOURCE_GROUP_EU \
-  --vnet-name $VNET_NAME_EU \
-  --remote-vnet "/subscriptions/$(az account show --query id -o tsv)/resourceGroups/$RESOURCE_GROUP_US/providers/Microsoft.Network/virtualNetworks/$VNET_NAME_US" \
-  --allow-vnet-access
+echo "Azure File Share deployment completed."
