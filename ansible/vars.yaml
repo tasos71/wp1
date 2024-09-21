@@ -16,8 +16,9 @@ global:
     subnet1: "10.5.1.0/24"
     subnet2: "10.5.2.0/24"
     nsg: "tasos-tech_task-wp01--rg_eu_west-NSG"
+    nsg_fileserver: "tasos-tech_task-WP01--FileServerNSG"
   
-  
+
   # us region
   us:
     resource_group: "tasos-tech_task-wp01--rg_us_west"
