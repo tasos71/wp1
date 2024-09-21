@@ -1,7 +1,7 @@
 - name: Update rules on existing security group
   azure_rm_securitygroup:
     resource_group: "{{ global.eu.resource_group }}"
-    name: "EU-NSG-rules"
+    name: "{{ global.eu.nsg }}"
     rules:
       - name: "AllowSMBInboundFromUS"
         priority: 100
