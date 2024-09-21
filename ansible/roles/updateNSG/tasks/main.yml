@@ -1,7 +1,7 @@
-- name: Update rules on existing security group
+- name: Update rules on existing security group for file server
   azure_rm_securitygroup:
     resource_group: "{{ global.eu.resource_group }}"
-    name: "{{ global.eu.nsg }}"
+    name: "{{ global.eu.nsg_fileserver }}"
     rules:
       - name: "AllowSMBInboundFromUS"
         priority: 100
@@ -25,8 +25,25 @@
         access: Allow
         protocol: Tcp
         destination_port_range: [80,443]
-        source_address_prefix: "{{ global.us.subnet2 }}"
-        destination_address_prefix: "*"        
+        source_address_prefix: "*"
+        destination_address_prefix: "*"
+      - name: "DenyAllOtherInboundFileServer"
+        priority: 4096
+        direction: Inbound
+        access: Deny
+        protocol: "*"
+        destination_port_range: "*"
+        source_address_prefix: "*"
+        destination_address_prefix: "*"                
     tags:
       testing: testing
       delete: on-exit
+
+- name: Associating NSG with file server and web service subnet in EU
+  azure_rm_subnet:
+    resource_group: "{{ global.eu.resource_group }}"
+    virtual_network_name: "{{ global.eu.vnetname }}"
+    name: "{{ global.eu.subent1 }}"
+    security_group:
+      name: "{{ global.eu.nsg_fileserver }}"
+      resource_group: "{{ global.eu.resource_group }}"
