@@ -15,10 +15,10 @@ output "nsgname" {
 }
 
 output "subnet1" {
-  value = tolist(azurerm_virtual_network.vnet.subnet[0].address_prefixes)
+  value = tolist(azurerm_virtual_network.vnet.subnet[subnet1].address_prefixes)
 }
 
 output "subnet2" {
-  value = tolist(azurerm_virtual_network.vnet.subnet[1].address_prefixes)
+  value = tolist(azurerm_virtual_network.vnet.subnet[subnet2].address_prefixes)
 }
 
