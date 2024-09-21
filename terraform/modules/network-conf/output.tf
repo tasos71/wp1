@@ -15,7 +15,7 @@ output "nsgname" {
 }
 
 output "subnet1" {
-  value = values(azurerm_virtual_network.vnet.subnet[1].address_prefixes
+  value = values(azurerm_virtual_network.vnet.subnet[1].address_prefixes)
 }
 
 output "subnet2" {
