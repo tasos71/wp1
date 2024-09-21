@@ -8,5 +8,5 @@ module "eu-network" {
 }
 
 output "vnetid" {
-  value = module.eu-network.vnet.id
+  value = module.eu-network.vnetid
 }
