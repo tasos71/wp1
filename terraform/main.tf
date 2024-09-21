@@ -1,7 +1,7 @@
 module "us" {
-  source = "environments/eu-region"
+  source = "./environments/eu-region"
 }
 
 module "eu" {
-  source = "environments/us-region"
+  source = "./environments/us-region"
 }
