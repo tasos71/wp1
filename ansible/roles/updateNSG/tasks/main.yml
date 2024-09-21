@@ -62,7 +62,7 @@
         destination_port_range: 3389
         source_address_prefix: "{{ global.eu.subnet2 }}"
         destination_address_prefix: "*"
-      - name: AllowSSHAccess"
+      - name: "AllowSSHAccess"
         priority: 101
         direction: Inbound
         access: Allow
