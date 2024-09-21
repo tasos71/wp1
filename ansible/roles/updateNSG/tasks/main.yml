@@ -141,7 +141,7 @@
         destination_port_range: 445
         source_address_prefix: "*"
         destination_address_prefix: "{{ global.eu.subnet1 }}"
-      - name: AllowHTTPHTTPSOutboundToEU"
+      - name: "AllowHTTPHTTPSOutboundToEU"
         priority: 200
         direction: Outbound
         access: Allow
