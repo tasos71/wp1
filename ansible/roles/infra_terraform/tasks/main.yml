@@ -1,0 +1,7 @@
+
+- name: Deploy Azure infrastructure with Terraform
+  community.general.terraform:
+    variables: '{ "cluster_name": "{{ client_cluster_name }}", "main_cidr": "{{ client_cluster_subnet }}", "vpc_name": "{{ client_tags }}", "wbs": "{{ client_wbs }}", "client": "{{ project_owner }}", "region": "{{ region }}", "main_rg": "{{ main_rg }}", "hub_vnet": "{{ hub_vnet }}", "remote_virtual_network_id": "{{ remote_virtual_network_id }}", "on_prem_dns_server": "{{ on_prem_dns_server }}", "on_prem_dns_server_2": "{{ on_prem_dns_server_2 }}", "azure_dns_server": "{{ azure_dns_server }}" }'
+    project_path: "{{ azure_project_directory }}"
+    force_init: yes
+    state: present

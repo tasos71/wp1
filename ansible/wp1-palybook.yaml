@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  
+  #Requires variables concetrated in one file
+  vars_files: 
+    - vars.yaml
+  
+  #Variables in order Ansible to login in Azure
+  environment:
+    AZURE_SUBSCRIPTION_ID: "{{ secret.azure_subscription_id }}"
+    AZURE_CLIENT_ID:       "{{ secret.azure_tenant_id }}"
+    AZURE_SECRET:          "{{ secret.azure_client_id }}"
+    AZURE_TENANT:          "{{ secret.azure_client_secret }}"
+
+  tasks:
+    - include_role:
+        name: infra_terraform    # Deploy Azure resources
+      vars:
+        cloud_element: "{{ azf.resources }}"
+        
+    - file_server        # Deploy and configure Azure file server
