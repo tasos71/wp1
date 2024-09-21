@@ -1,6 +1,6 @@
 - name: Update rules on existing security group
   azure_rm_securitygroup:
-    resource_group: {{ eu.resource_group }}
+    resource_group: {{ global.eu.resource_group }}
     name: "EU-NSG-rules"
     rules:
       - name: "AllowSMBInboundFromUS"
@@ -9,7 +9,7 @@
         access: Allow
         protocol: Tcp
         destination_port_range: 445
-        source-address-prefix: {{ us.subnet1 }}
+        source-address-prefix: {{ global.us.subnet1 }}
         destination-address-prefix: "*"
     tags:
       testing: testing

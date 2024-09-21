@@ -1,29 +1,30 @@
 # Azure Authentication
-secret:
-  azure_subscription_id: "65008410-3554-490e-8d48-54b2b065d97a"
-  azure_tenant_id: "92587c31-827a-4b7d-870a-f29c9f9103b2"
-  azure_client_id: ""
-  azure_client_secret: ""
-
-# EU Region
-eu:
-  resource_group: "tasos-tech_task-wp01--rg_eu_west"
-  location: "westeurope"
-  vnet_name: "tech_task-wp01--vnet_eu_west"
-  address_prefix_vnet: "10.5.0.0/16"
-  main_cidr: "10.5.0.0/16"
-  subnet1: "10.5.1.0/24"
-  subnet2: "10.5.2.0/24"
-
-
-# us region
-us:
-  resource_group: "tasos-tech_task-wp01--rg_us_west"
-  location: "westus"
-  vnet_name: "tech_task-wp01--vnet_us_west"
-  address_prefix_vnet: "10.4.0.0/16"
-  subnet1: "10.4.1.0/24"
-  subnet2: "10.4.2.0/24"
+global:
+  secret:
+    azure_subscription_id: "65008410-3554-490e-8d48-54b2b065d97a"
+    azure_tenant_id: "92587c31-827a-4b7d-870a-f29c9f9103b2"
+    azure_client_id: ""
+    azure_client_secret: ""
+  
+  # EU Region
+  eu:
+    resource_group: "tasos-tech_task-wp01--rg_eu_west"
+    location: "westeurope"
+    vnet_name: "tech_task-wp01--vnet_eu_west"
+    address_prefix_vnet: "10.5.0.0/16"
+    main_cidr: "10.5.0.0/16"
+    subnet1: "10.5.1.0/24"
+    subnet2: "10.5.2.0/24"
+  
+  
+  # us region
+  us:
+    resource_group: "tasos-tech_task-wp01--rg_us_west"
+    location: "westus"
+    vnet_name: "tech_task-wp01--vnet_us_west"
+    address_prefix_vnet: "10.4.0.0/16"
+    subnet1: "10.4.1.0/24"
+    subnet2: "10.4.2.0/24"
 
 
 # optional subnet variables (leave empty if not needed)
