@@ -15,9 +15,9 @@ output "nsgname" {
 }
 
 output "subnet1" {
-  value = "${module.eu-network.subnet1}"
+  value = module.eu-network.subnet1
 }
 
 output "subnet2" {
-  value = "${module.eu-network.subnet2}"
+  value = module.eu-network.subnet2
 }

@@ -16,7 +16,7 @@ module "eu-sec-rule-1" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = 445
-  source_address_prefix       = "${module.eu-network.subnet1}"
+  source_address_prefix       = module.eu-network.subnet1
   destination_address_prefix  = "*"
   description                 = "Allow SMB inbound from US Subnet 1"
   resource_group_name         = "${module.eu-network.rgname}"
