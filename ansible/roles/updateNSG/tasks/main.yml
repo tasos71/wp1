@@ -11,6 +11,22 @@
         destination_port_range: 445
         source_address_prefix: "{{ global.us.subnet1 }}"
         destination_address_prefix: "*"
+      - name: "AllowSMBInboundFromUSSubnet2"
+        priority: 101
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        destination_port_range: 445
+        source_address_prefix: "{{ global.us.subnet2 }}"
+        destination_address_prefix: "*"
+      - name: "AllowHTTPHTTPSInbound"
+        priority: 200
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        destination_port_range: [80,443]
+        source_address_prefix: "{{ global.us.subnet2 }}"
+        destination_address_prefix: "*"        
     tags:
       testing: testing
       delete: on-exit
