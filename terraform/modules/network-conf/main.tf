@@ -10,6 +10,7 @@ terraform {
 provider "azurerm" {
 
   features {}
+  subscription_id = "65008410-3554-490e-8d48-54b2b065d97a"
 }
 
 resource "azurerm_resource_group" "rg" {
