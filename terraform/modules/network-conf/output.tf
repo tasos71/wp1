@@ -15,10 +15,10 @@ output "nsgname" {
 }
 
 output "subnet1" {
-  value = azurerm_virtual_network.vnet.subnet.0.address_prefixes
+  value = one(azurerm_virtual_network.vnet.subnet[0].address_prefixes)
 }
 
 output "subnet2" {
-  value = azurerm_virtual_network.vnet.subnet.1.address_prefixes
+  value = one(azurerm_virtual_network.vnet.subnet[1].address_prefixes)
 }
 
