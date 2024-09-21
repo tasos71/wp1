@@ -17,7 +17,6 @@ resource "azurerm_resource_group" "rg" {
   location = var.region
 }
 
-
 resource "azurerm_virtual_network" "vnet" {
   name                = "${azurerm_resource_group.rg.name}-vnet"
   location            = azurerm_resource_group.rg.location
@@ -25,12 +24,12 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = [var.main_cidr]
 
   subnet {
-    name             = "${azurerm_resource_group.vnet.name}-subnet1"
+    name             = "${azurerm_resource_group.rg.name}-subnet1"
     address_prefixes = [var.subnet1]
   }
 
   subnet {
-    name             = "${azurerm_resource_group.vnet.name}-subnet2"
+    name             = "${azurerm_resource_group.rg.name}-subnet2"
     address_prefixes = [var.subnet2]
     #security_group   = azurerm_network_security_group.example.id
   }
