@@ -6,3 +6,11 @@ module "us-conf" {
   source = "./environments/us-region"
 }
 
+module "eu-us-peerirg" {
+  source                       = "./modules/network-peerirg"
+  #name                         = "${module.eu-network.resource_group}-to-us-peering"
+  #resouterce_group_name          = "${module.us-network.resource_group}"
+  #virtual_network_name         = "${module.eu-conf.module.eu-network.name}"
+  remote_virtual_network_id    = "${module.eu-network.vnetid}"
+}
+
