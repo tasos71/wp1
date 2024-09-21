@@ -1,42 +1,34 @@
-# Azure Authentication
 global:
+# Azure Authentication
   secret:
     azure_subscription_id: "65008410-3554-490e-8d48-54b2b065d97a"
     azure_tenant_id: "92587c31-827a-4b7d-870a-f29c9f9103b2"
     azure_client_id: ""
-    azure_client_secret: ""
-  
-  # EU Region
+    azure_client_secret: ""  
+# EU Region
   eu:
-    resource_group: "tasos-tech_task-wp01--rg_eu_west"
+    resource_group: "test-tech_task-wp01--rg_eu_west"
     location: "westeurope"
-    vnet_name: "tasos-tech_task-wp01--rg_eu_west-vnet"
+    vnet_name: "test-tech_task-wp01--rg_eu_west-vnet"
     address_prefix_vnet: "10.5.0.0/16"
     main_cidr: "10.5.0.0/16"
-    subnet_name_eu_1: "tasos-tech_task-wp01--rg_eu_west-subnet1"
+    subnet_name_eu_1: "test-tech_task-wp01--rg_eu_west-subnet1"
     subnet1: "10.5.1.0/24"
+    subnet_name_eu_2: "test-tech_task-wp01--subnet_eu_west-subnet2"
     subnet2: "10.5.2.0/24"
-    nsg: "tasos-tech_task-wp01--rg_eu_west-NSG"
-    nsg_fileserver: "tasos-tech_task-WP01--FileServerNSG"
-  
-
-  # us region
+    nsg: "test-tech_task-wp01--rg_eu_west-NSG"
+    nsg_fileserver: "test-tech_task-WP01--FileServerNSG"
+    nsg_admin: ""
+# US region
   us:
-    resource_group: "tasos-tech_task-wp01--rg_us_west"
+    resource_group: "test-tech_task-wp01--rg_us_west"
     location: "westus"
     vnet_name: "tech_task-wp01--vnet_us_west"
     address_prefix_vnet: "10.4.0.0/16"
+    subnet_name_us_1: "test-tech_task-wp01--subnet_us_west-subnet1"
     subnet1: "10.4.1.0/24"
+    subnet_name_us_2: "test-ech_task-wp01--subnet_us_west-subnet2"
     subnet2: "10.4.2.0/24"
-
-
-# optional subnet variables (leave empty if not needed)
-#subnet_name_us_1: "tech_task-wp01--subnet_us_west01"
-#address_prefix_subnet_us_1: "10.2.1.0/24"
-#subnet_name_us_2: "tech_task-wp01--subnet_us_west02"
-#address_prefix_subnet_us_2: "10.2.2.0/24"
-#
-
-#address_prefix_subnet_eu_1: "10.3.1.0/24"
-#subnet_name_eu_2: "tech_task-wp01--subnet_eu_west2"
-#address_prefix_subnet_eu_2: "10.3.2.0/24"
+#Storage
+  storage:
+    service_tag: "Storage"

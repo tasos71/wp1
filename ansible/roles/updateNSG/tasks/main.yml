@@ -44,7 +44,131 @@
     resource_group: "{{ global.eu.resource_group }}"
     virtual_network_name: "{{ global.eu.vnet_name }}"
     name: "{{ global.eu.subnet_name_eu_1 }}"
-    address_prefixes_cidr: "{{global.eu.subnet1}}"
+    address_prefixes_cidr: "{{ global.eu.subnet1 }}"
     security_group:
       name: "{{ global.eu.nsg_fileserver }}"
       resource_group: "{{ global.eu.resource_group }}"
+
+- name: Update rules on existing security group for Admin NSG
+  azure_rm_securitygroup:
+    resource_group: "{{ global.eu.resource_group }}"
+    name: "{{ global.eu.nsg_admin }}"
+    rules:
+      - name: "AllowRDPAccess"
+        priority: 100
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        destination_port_range: 3389
+        source_address_prefix: "{{ global.eu.subnet2 }}"
+        destination_address_prefix: "*"
+      - name: AllowSSHAccess"
+        priority: 101
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        destination_port_range: 22
+        source_address_prefix: "{{ global.eu.subnet2 }}"
+        destination_address_prefix: "*"
+      - name: "DenyAllOtherInboundAdmin"
+        priority: 4096
+        direction: Inbound
+        access: Deny
+        protocol: "*"
+        destination_port_range: "*"
+        source_address_prefix: "*"
+        destination_address_prefix: "*"
+      - name: "AllowSMBForEuropeUsers"
+        priority: 230
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        source_address_prefix: "{{ global.eu.subnet1 }}"
+        source_port_range: "*"
+        destination_address_prefix: "{{ global.storage.service_tag }}"
+        destination_port_range: 445
+      - name: "AllowSMB"
+        priority: 200
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        source_address_prefix: "*"
+        source_port_range: "*"
+        destination_address_prefix: "{{ global.storage.service_tag }}"
+        destination_port_range: 445
+      - name: "AllowNFS"
+        priority: 210
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        source_address_prefix: "*"
+        source_port_range: "*"
+        destination_address_prefix: "{{ global.storage.service_tag }}"
+        destination_port_range: 2049
+      - name: "AllowOutboundToStorage"
+        priority: 220
+        direction: Inbound
+        access: Allow
+        protocol: Tcp
+        source_address_prefix: "*"
+        source_port_range: "*"
+        destination_address_prefix: "{{ global.storage.service_tag }}"
+        destination_port_range: "*"
+    tags:
+      testing: testing
+      delete: on-exit
+
+- name: Associating NSG with admin subnet in EU
+  azure_rm_subnet:
+    resource_group: "{{ global.eu.resource_group }}"
+    virtual_network_name: "{{ global.eu.vnet_name }}"
+    name: "{{ global.eu.subnet_name_eu_2 }}"
+    address_prefixes_cidr: "{{ global.eu.subnet2 }}"
+    security_group:
+      name: "{{ global.eu.nsg_admin }}"
+      resource_group: "{{ global.eu.resource_group }}"
+
+- name: Update rules on existing security group NSG US
+  azure_rm_securitygroup:
+    resource_group: "{{ global.us.resource_group }}"
+    name: "{{ global.us.nsg }}"
+    rules:
+      - name: "AllowSMBOutboundToEU"
+        priority: 100
+        direction: Outbound
+        access: Allow
+        protocol: Tcp
+        destination_port_range: 445
+        source_address_prefix: "*"
+        destination_address_prefix: "{{ global.eu.subnet1 }}"
+      - name: AllowHTTPHTTPSOutboundToEU"
+        priority: 200
+        direction: Outbound
+        access: Allow
+        protocol: Tcp
+        destination_port_range: [80,443]
+        source_address_prefix: "*"
+        destination_address_prefix: "{{ global.eu.subnet1 }}"            
+    tags:
+      testing: testing
+      delete: on-exit      
+
+- name: Associating NSG with US subnet1
+  azure_rm_subnet:
+    resource_group: "{{ global.us.resource_group }}"
+    virtual_network_name: "{{ global.us.vnet_name }}"
+    name: "{{ global.us.subnet_name_us_1 }}"
+    address_prefixes_cidr: "{{ global.us.subnet1 }}"
+    security_group:
+      name: "{{ global.us.nsg }}"
+      resource_group: "{{ global.us.resource_group }}"
+
+- name: Associating NSG with US subnet2
+  azure_rm_subnet:
+    resource_group: "{{ global.us.resource_group }}"
+    virtual_network_name: "{{ global.us.vnet_name }}"
+    name: "{{ global.us.subnet_name_us_2 }}"
+    address_prefixes_cidr: "{{ global.us.subnet2 }}"
+    security_group:
+      name: "{{ global.us.nsg }}"
+      resource_group: "{{ global.us.resource_group }}"
