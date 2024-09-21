@@ -8,9 +8,9 @@ module "us-conf" {
 
 module "eu-us-peerirg" {
   source                       = "./modules/network-peerirg"
-  #name                         = "${module.eu-network.resource_group}-to-us-peering"
-  #resouterce_group_name          = "${module.us-network.resource_group}"
-  #virtual_network_name         = "${module.eu-conf.module.eu-network.name}"
+  name                         = "${module.eu-conf.rgname}-to-us-peering"
+  resource_group_name          = "${module.eu-conf.rgname}"
+  virtual_network_name         = "${module.eu-conf.vnetname}"
   remote_virtual_network_id    = "${module.eu-conf.vnetid}"
 }
 

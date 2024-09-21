@@ -6,7 +6,3 @@ module "eu-network" {
   subnet1           = "10.5.1.0/24"
   subnet2           = "10.5.2.0/24"
 }
-
-output "vnetid" {
-  value = module.eu-network.vnetid
-}
