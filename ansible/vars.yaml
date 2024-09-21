@@ -10,7 +10,7 @@ global:
   eu:
     resource_group: "tasos-tech_task-wp01--rg_eu_west"
     location: "westeurope"
-    vnet_name: "tasos-tech_task-wp01--rg_eu_west"
+    vnet_name: "tasos-tech_task-wp01--rg_eu_west-vnet"
     address_prefix_vnet: "10.5.0.0/16"
     main_cidr: "10.5.0.0/16"
     subnet_name_eu_1: "tasos-tech_task-wp01--rg_eu_west-subnet1"
