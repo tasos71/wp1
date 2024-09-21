@@ -42,8 +42,8 @@
 - name: Associating NSG with file server and web service subnet in EU
   azure_rm_subnet:
     resource_group: "{{ global.eu.resource_group }}"
-    virtual_network_name: "{{ global.eu.vnetname }}"
-    name: "{{ global.eu.subent1 }}"
+    virtual_network_name: "{{ global.eu.vnet_name }}"
+    name: "{{ global.eu.subnet1 }}"
     security_group:
       name: "{{ global.eu.nsg_fileserver }}"
       resource_group: "{{ global.eu.resource_group }}"
