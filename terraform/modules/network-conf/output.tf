@@ -19,6 +19,6 @@ output "subnet1" {
 }
 
 output "subnet2" {
-  value = two(azurerm_virtual_network.vnet.subnet[*].address_prefixes)
+  value = one(azurerm_virtual_network.vnet.subnet[*].address_prefixes)
 }
 
