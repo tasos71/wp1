@@ -17,8 +17,8 @@ global:
     subnet_name_eu_2: "test-tech_task-wp01--subnet_eu_west-subnet2"
     subnet2: "10.5.2.0/24"
     nsg: "test-tech_task-wp01--rg_eu_west-NSG"
-    nsg_fileserver: "test-tech_task-WP01--FileServerNSG"
-    nsg_admin: ""
+    nsg_fileserver: "test-tech_task-wp01--rg_eu_west-NSG-fileserver"
+    nsg_admin: "test-tech_task-wp01--rg_eu_west-NSG-Admin"
 # US region
   us:
     resource_group: "test-tech_task-wp01--rg_us_west"
