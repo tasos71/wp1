@@ -10,32 +10,6 @@ variable "region" {
   description = "Azure Region"
 }
 
-variable "vpc_name" {
-  type = string
-  default = "client-test-1"
-  description = "value"
-}
-
-variable "main_rg" {
-    type = string
-    default = "rg_azure"
-}
-
-variable "hub_vnet" {
-    type = string
-    default = "rg_azure-vnet"
-}
-
-variable "azure_dns_server" {
-  type = string
-  default = "1.1.1.1"
-}
-
-variable "remote_virtual_network_id" {
-    type = string
-    default = "default"
-}
-
 variable "main_cidr" {
   type = string
   default = "10.0.0.0/16"
