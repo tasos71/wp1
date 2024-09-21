@@ -13,6 +13,7 @@ global:
     vnet_name: "tasos-tech_task-wp01--rg_eu_west"
     address_prefix_vnet: "10.5.0.0/16"
     main_cidr: "10.5.0.0/16"
+    subnet_name_eu_1: "tasos-tech_task-wp01--rg_eu_west-subnet1"
     subnet1: "10.5.1.0/24"
     subnet2: "10.5.2.0/24"
     nsg: "tasos-tech_task-wp01--rg_eu_west-NSG"
@@ -35,7 +36,7 @@ global:
 #subnet_name_us_2: "tech_task-wp01--subnet_us_west02"
 #address_prefix_subnet_us_2: "10.2.2.0/24"
 #
-#subnet_name_eu_1: "tech_task-wp01--subnet_eu_west1"
+
 #address_prefix_subnet_eu_1: "10.3.1.0/24"
 #subnet_name_eu_2: "tech_task-wp01--subnet_eu_west2"
 #address_prefix_subnet_eu_2: "10.3.2.0/24"
