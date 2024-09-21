@@ -9,3 +9,7 @@ output "vnetname" {
 output "vnetid" {
   value = azurerm_virtual_network.vnet.id
 }
+
+output "nsgname" {
+  value = azurerm_network_security_group.nsg.name
+}
