@@ -17,6 +17,26 @@ resource "azurerm_resource_group" "rg" {
   location = var.region
 }
 
+
+resource "azurerm_virtual_network" "vnet" {
+  name                = "${azurerm_resource_group.rg.name}-vnet"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  address_space       = [var.main_cidr]
+
+  subnet {
+    name             = "${azurerm_resource_group.vnet.name}-subnet1"
+    address_prefixes = [var.subnet1]
+  }
+
+  subnet {
+    name             = "${azurerm_resource_group.vnet.name}-subnet2"
+    address_prefixes = [var.subnet2]
+    #security_group   = azurerm_network_security_group.example.id
+  }
+}
+
+
 #resource "azurerm_network_security_group" "example" {
 #  name                = "acceptanceTestSecurityGroup1"
 #  location            = azurerm_resource_group.example.location
@@ -35,23 +55,14 @@ resource "azurerm_resource_group" "rg" {
 #  }
 #
 #
-#resource "azurerm_virtual_network" "vnet-${var.region}" {
-#  name                = "${var.region}-vnet"
-#  location            = azurerm_resource_group.spoke-vnet-rg.location
-#  resource_group_name = azurerm_resource_group.spoke-vnet-rg.name
-#  address_space       = [var.main_cidr]
-#
-#  subnet {
-#    name             = "subnet1"
-#    address_prefixes = [var.subnet1]
-#  }
-#
-#  subnet {
-#    name             = "subnet2"
-#    address_prefixes = [var.subnet2]
-#    security_group   = azurerm_network_security_group.example.id
-#  }
-#}
+
+
+
+
+
+
+
+
 #
 #
 #resource "azurerm_virtual_network_peering" "spoke-hub-peer" {
