@@ -29,6 +29,7 @@ global:
     subnet1: "10.4.1.0/24"
     subnet_name_us_2: "test-tech_task-wp01--rg_us_west-subnet2"
     subnet2: "10.4.2.0/24"
+    nsg: "test-tech_task-wp01--rg_us_west-NSG"
 #Storage
   storage:
     service_tag: "Storage"
