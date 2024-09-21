@@ -9,8 +9,8 @@
         access: Allow
         protocol: Tcp
         destination_port_range: 445
-        source-address-prefix: "{{ global.us.subnet1 }}"
-        destination-address-prefix: "*"
+        source_address_prefix: "{{ global.us.subnet1 }}"
+        destination_address_prefix: "*"
     tags:
       testing: testing
       delete: on-exit
