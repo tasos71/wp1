@@ -15,10 +15,10 @@ output "nsgname" {
 }
 
 output "subnet1" {
-  value = azurerm_virtual_network.vnet.subnet1.address_prefixes
+  value = azurerm_virtual_network.vnet.subnet.address_prefixes
 }
 
-output "subnet2" {
-  value = azurerm_virtual_network.vnet.subnet2.address_prefixes
-}
+#output "subnet2" {
+#  value = azurerm_virtual_network.vnet.subnet2.address_prefixes
+#}
 
