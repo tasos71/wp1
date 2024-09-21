@@ -1,5 +1,4 @@
-resource_group="tasos-tech_task-wp01--rg_us_west"
-region="westus"
+
 vnet_name_us="tasos-tech_task-wp01--vnet_us_west"
 address_prefix_vnet_us="10.4.0.0/16"
 

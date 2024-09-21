@@ -1,3 +1,5 @@
 module "us-network" {
-  source = "../../network-conf"
+  source            = "../modules/network-conf"
+  resource_group    = "tasos-tech_task-wp01--rg_us_west"
+  region            = "westus"
 }
