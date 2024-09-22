@@ -33,4 +33,4 @@ global:
 #Storage
   storage:
     service_tag: "Storage"
-    account_name: "euwp1storagetest101"
+    account_name: "euwp1storagetest102"
