@@ -37,12 +37,12 @@ resource "azurerm_storage_account" "storage" {
   }
 }
 
-resource "azurerm_storage_share" "FSShare" {
-  name                 = "fslogix"
-  storage_account_name = azurerm_storage_account.storage.name
-  depends_on           = [azurerm_storage_account.storage]
-  quota                = 100
-}
+#resource "azurerm_storage_share" "FSShare" {
+#  name                 = "fslogix"
+#  storage_account_name = azurerm_storage_account.storage.name
+#  depends_on           = [azurerm_storage_account.storage]
+#  quota                = 100
+#}
 
 ## Azure built-in roles
 ## https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
