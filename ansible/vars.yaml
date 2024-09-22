@@ -4,7 +4,7 @@ global:
     azure_subscription_id: "65008410-3554-490e-8d48-54b2b065d97a"
     azure_tenant_id: "92587c31-827a-4b7d-870a-f29c9f9103b2"
     azure_client_id: ""
-    azure_client_secret: ""  
+    azure_client_secret: ""
 # EU Region
   eu:
     resource_group: "test-tech_task-wp01--rg_eu_west"
@@ -33,4 +33,4 @@ global:
 #Storage
   storage:
     service_tag: "Storage"
-    account_name: "storagetest1234"
+    account_name: "euwp1storagetest1234201287"
