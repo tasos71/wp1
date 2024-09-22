@@ -1,5 +1,5 @@
 - name: Update rules on existing security group for file server
-  azure_rm_securitygroup:
+  azure.azcollection.azure_rm_securitygroup:
     resource_group: "{{ global.eu.resource_group }}"
     name: "{{ global.eu.nsg_fileserver }}"
     rules:
@@ -40,7 +40,7 @@
       delete: on-exit
 
 - name: Associating NSG with file server and web service subnet in EU
-  azure_rm_subnet:
+  azure.azcollection.azure_rm_subnet:
     resource_group: "{{ global.eu.resource_group }}"
     virtual_network_name: "{{ global.eu.vnet_name }}"
     name: "{{ global.eu.subnet_name_eu_1 }}"
@@ -50,7 +50,7 @@
       resource_group: "{{ global.eu.resource_group }}"
 
 - name: Update rules on existing security group for Admin NSG
-  azure_rm_securitygroup:
+  azure.azcollection.azure_rm_securitygroup:
     resource_group: "{{ global.eu.resource_group }}"
     name: "{{ global.eu.nsg_admin }}"
     rules:
@@ -119,7 +119,7 @@
       delete: on-exit
 
 - name: Associating NSG with admin subnet in EU
-  azure_rm_subnet:
+  azure.azcollection.azure_rm_subnet:
     resource_group: "{{ global.eu.resource_group }}"
     virtual_network_name: "{{ global.eu.vnet_name }}"
     name: "{{ global.eu.subnet_name_eu_2 }}"
@@ -129,7 +129,7 @@
       resource_group: "{{ global.eu.resource_group }}"
 
 - name: Update rules on existing security group NSG US
-  azure_rm_securitygroup:
+  azure.azcollection.azure_rm_securitygroup:
     resource_group: "{{ global.us.resource_group }}"
     name: "{{ global.us.nsg }}"
     rules:
@@ -154,7 +154,7 @@
       delete: on-exit      
 
 - name: Associating NSG with US subnet1
-  azure_rm_subnet:
+  azure.azcollection.azure_rm_subnet:
     resource_group: "{{ global.us.resource_group }}"
     virtual_network_name: "{{ global.us.vnet_name }}"
     name: "{{ global.us.subnet_name_us_1 }}"
@@ -164,7 +164,7 @@
       resource_group: "{{ global.us.resource_group }}"
 
 - name: Associating NSG with US subnet2
-  azure_rm_subnet:
+  azure.azcollection.azure_rm_subnet:
     resource_group: "{{ global.us.resource_group }}"
     virtual_network_name: "{{ global.us.vnet_name }}"
     name: "{{ global.us.subnet_name_us_2 }}"

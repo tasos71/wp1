@@ -15,7 +15,5 @@
   tasks:
     - include_role:
         name: updateNSG    #  Azure resources
-#      vars:
-#        cloud_element: "{{ azf.resources }}"
     - include_role:
          name: file-server-conf

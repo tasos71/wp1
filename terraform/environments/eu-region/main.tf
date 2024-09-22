@@ -36,7 +36,7 @@ resource "azurerm_network_security_group" "nsg-admin" {
 
 module "azure-file-server" {
   source              = "../../modules/azure-file-server"
-  name                = "euwp1storagetest100"
+  name                = "euwp1storagetest101"
   location            = "westeurope"
   resource_group_name = module.eu-network.rgname
 }

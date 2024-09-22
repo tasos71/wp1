@@ -1,24 +1,26 @@
 - name: Adding Microsoft.Storage service endpoint to the subnet
-  azure_rm_subnet:
+  azure.azcollection.azure_rm_subnet:
     resource_group: "{{ global.eu.resource_group }}"
     virtual_network_name: "{{ global.eu.vnet_name }}"
     name: "{{ global.eu.subnet_name_eu_1 }}"
     address_prefixes_cidr: "{{ global.eu.subnet1 }}"
     service_endpoints:
       - service: 'Microsoft.Storage'
-
-- name: Configure firewall and virtual networks fro storage account
-  azure_rm_storageaccount:
+ 
+- name: Configure firewall and virtual networks from storage account
+  azure.azcollection.azure_rm_storageaccount:
     resource_group: "{{ global.eu.resource_group }}"
     name: "{{ global.storage.account_name}}"
     https_only: false
     network_acls:
+      bypass: "AzureServices"
+      default_action: Deny
       virtual_network_rules:
-        - id: /subscriptions/{{global.secret.azure_subscription_id}}/resourceGroups/{{ global.eu.resource_group }}/providers/Microsoft.Network/virtualNetworks/{{vnet_name}}/subnets/{{subnet_name_eu_1}}
-          action: Allow
+        - id: /subscriptions/{{global.secret.azure_subscription_id}}/resourceGroups/{{ global.eu.resource_group }}/providers/Microsoft.Network/virtualNetworks/{{global.eu.vnet_name}}/subnets/{{global.eu.subnet_name_eu_1}}
+          action: Allow          
 
 - name: Create NFS storage share
-  azure_rm_storageshare:
+  azure.azcollection.azure_rm_storageshare:
     name: nfsshare
     resource_group: "{{ global.eu.resource_group }}"
     account_name: "{{ global.storage.account_name}}"
@@ -27,8 +29,8 @@
     quota: 100
 
 - name: Create SMB storage share
-  azure_rm_storageshare:
-    name: nfsshare
+  azure.azcollection.azure_rm_storageshare:
+    name: smbshare
     resource_group: "{{ global.eu.resource_group }}"
     account_name: "{{ global.storage.account_name}}"
     enabled_protocols: SMB
