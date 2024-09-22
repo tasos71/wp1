@@ -27,8 +27,15 @@ resource "azurerm_network_security_group" "nsg-fileserver" {
   location            = "westeurope"
   resource_group_name = module.eu-network.rgname
 }
+
 resource "azurerm_network_security_group" "nsg-admin" {
   name                = "${module.eu-network.rgname}-NSG-Admin"
+  location            = "westeurope"
+  resource_group_name = module.eu-network.rgname
+}
+
+module "azure-file-server" {
+  source            = "../../modules/azure-file-server"
   location            = "westeurope"
   resource_group_name = module.eu-network.rgname
 }
