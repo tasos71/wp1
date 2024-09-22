@@ -26,7 +26,7 @@
     root_squash: RootSquash
     quota: 100
 
-- name: Create NFS storage share
+- name: Create SMB storage share
   azure_rm_storageshare:
     name: nfsshare
     resource_group: "{{ global.eu.resource_group }}"
