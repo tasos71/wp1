@@ -46,12 +46,12 @@ resource "azurerm_storage_share" "FSShare" {
 
 ## Azure built-in roles
 ## https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
-data "azurerm_role_definition" "storage_role" {
-  name = "Storage File Data SMB Share Contributor"
-}
-
-resource "azurerm_role_assignment" "af_role" {
-  scope              = azurerm_storage_account.storage.id
-  role_definition_id = data.azurerm_role_definition.storage_role.id
-  principal_id       = azuread_group.aad_group.id
-}
+#data "azurerm_role_definition" "storage_role" {
+#  name = "Storage File Data SMB Share Contributor"
+#}
+#
+#resource "azurerm_role_assignment" "af_role" {
+#  scope              = azurerm_storage_account.storage.id
+#  role_definition_id = data.azurerm_role_definition.storage_role.id
+#  principal_id       = azuread_group.aad_group.id
+#}
