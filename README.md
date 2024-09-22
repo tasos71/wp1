@@ -1,5 +1,4 @@
 # wp1
-
 Run Terraform
 1. Install the latest terraform
 2. In you bash shell export TF_VAR_az_sub_id="<azure subscription id>"
