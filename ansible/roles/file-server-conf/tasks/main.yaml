@@ -1,0 +1,9 @@
+- name: Adding Microsoft.Storage service endpoint to the subnet
+  azure_rm_subnet:
+    resource_group: "{{ global.eu.resource_group }}"
+    virtual_network_name: "{{ global.eu.vnet_name }}"
+    name: "{{ global.eu.subnet_name_eu_1 }}"
+    address_prefixes_cidr: "{{ global.eu.subnet1 }}"
+    delegations:
+      - name: 'Storage endpoint'
+        serviceName: 'Microsoft.Storage'

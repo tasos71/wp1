@@ -17,5 +17,5 @@
         name: updateNSG    #  Azure resources
 #      vars:
 #        cloud_element: "{{ azf.resources }}"
-        
-#    - file_server        # Deploy and configure Azure file server
+    - include_role:
+         name: file-server-conf

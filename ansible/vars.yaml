@@ -33,3 +33,4 @@ global:
 #Storage
   storage:
     service_tag: "Storage"
+    account_name: "storage-test-1234"
