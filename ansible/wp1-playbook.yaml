@@ -5,12 +5,12 @@
   vars_files: 
     - vars.yaml
   
-  #Variables in order Ansible to login in Azure
-#  environment:
-#    AZURE_SUBSCRIPTION_ID: "{{ global.secret.azure_subscription_id }}"
-#    AZURE_CLIENT_ID:       "{{ global.secret.azure_tenant_id }}"
-#    AZURE_SECRET:          "{{ global.secret.azure_client_id }}"
-#    AZURE_TENANT:          "{{ global.secret.azure_client_secret }}"
+  #Variables in order Ansible to login in Azure, if the credentials file is not place
+  #environment:
+  #  AZURE_SUBSCRIPTION_ID: "{{ global.secret.azure_subscription_id }}"
+  #  AZURE_CLIENT_ID:       "{{ global.secret.azure_tenant_id }}"
+  #  AZURE_SECRET:          "{{ global.secret.azure_client_id }}"
+  #  AZURE_TENANT:          "{{ global.secret.azure_client_secret }}"
 
   tasks:
     - include_role:

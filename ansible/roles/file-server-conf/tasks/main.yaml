@@ -4,6 +4,5 @@
     virtual_network_name: "{{ global.eu.vnet_name }}"
     name: "{{ global.eu.subnet_name_eu_1 }}"
     address_prefixes_cidr: "{{ global.eu.subnet1 }}"
-    delegations:
-      - name: 'Storage endpoint'
-        serviceName: 'Microsoft.Storage'
+    service_endpoints:
+      - service: 'Microsoft.Storage'

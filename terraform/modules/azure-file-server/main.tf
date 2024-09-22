@@ -13,19 +13,11 @@ provider "azurerm" {
   subscription_id = "65008410-3554-490e-8d48-54b2b065d97a"
 }
 
-# generate a random string (consisting of four characters)
-# https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string
-resource "random_string" "random" {
-  length  = 4
-  upper   = false
-  special = false
-}
-
 ## Azure Storage Accounts requires a globally unique names
 ## https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview
 ## Create a File Storage Account 
 resource "azurerm_storage_account" "storage" {
-  name                     = "stor${random_string.random.id}"
+  name                     = "storage-test-1234"
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Premium"
