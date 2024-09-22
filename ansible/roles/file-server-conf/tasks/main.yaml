@@ -6,3 +6,15 @@
     address_prefixes_cidr: "{{ global.eu.subnet1 }}"
     service_endpoints:
       - service: 'Microsoft.Storage'
+
+- name: Configure firewall and virtual networks fro storage account
+  azure_rm_storageaccount:
+    resource_group: "{{ global.eu.resource_group }}"
+    name: "{{ global.storage.account_name}}"
+    type: Standard_RAGRS
+    network_acls:
+      bypass: AzureServices,Metrics
+      default_action: Deny
+      virtual_network_rules:
+        - id: /subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet
+          action: Allow

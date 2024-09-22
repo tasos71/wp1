@@ -1,3 +1,9 @@
+variable "name" {
+  type        = string
+  default     = "my-storage-account"
+  description = "Name of the storage account"
+}
+
 variable "location" {
   type        = string
   default     = "eastus"

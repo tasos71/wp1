@@ -17,7 +17,7 @@ provider "azurerm" {
 ## https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview
 ## Create a File Storage Account 
 resource "azurerm_storage_account" "storage" {
-  name                     = "storage-test-1234"
+  name                     = var.name
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Premium"
