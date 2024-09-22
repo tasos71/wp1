@@ -11,10 +11,25 @@
   azure_rm_storageaccount:
     resource_group: "{{ global.eu.resource_group }}"
     name: "{{ global.storage.account_name}}"
-    type: Standard_RAGRS
+    https_only: false
     network_acls:
-      bypass: AzureServices,Metrics
-      default_action: Deny
       virtual_network_rules:
-        - id: /subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet
+        - id: /subscriptions/{{global.secret.azure_subscription_id}}/resourceGroups/{{ global.eu.resource_group }}/providers/Microsoft.Network/virtualNetworks/{{vnet_name}}/subnets/{{subnet_name_eu_1}}
           action: Allow
+
+- name: Create NFS storage share
+  azure_rm_storageshare:
+    name: nfsshare
+    resource_group: "{{ global.eu.resource_group }}"
+    account_name: "{{ global.storage.account_name}}"
+    enabled_protocols: NFS
+    root_squash: RootSquash
+    quota: 100
+
+- name: Create NFS storage share
+  azure_rm_storageshare:
+    name: nfsshare
+    resource_group: "{{ global.eu.resource_group }}"
+    account_name: "{{ global.storage.account_name}}"
+    enabled_protocols: SMB
+    quota: 100
