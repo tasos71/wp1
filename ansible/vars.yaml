@@ -1,7 +1,7 @@
 global:
 # Azure Authentication
   secret:
-    azure_subscription_id: "65008410-3554-490e-8d48-54b2b065d97a"
+    azure_subscription_id: ""
     azure_tenant_id: ""
     azure_client_id: ""
     azure_client_secret: ""

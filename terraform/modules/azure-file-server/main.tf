@@ -1,18 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "~>4.0"
-    }
-  }
-}
-
-provider "azurerm" {
-
-  features {}
-  subscription_id = "65008410-3554-490e-8d48-54b2b065d97a"
-}
-
 ## Azure Storage Accounts requires a globally unique names
 ## https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview
 ## Create a File Storage Account 

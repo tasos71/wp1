@@ -1,18 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "~>4.0"
-    }
-  }
-}
-
-provider "azurerm" {
-
-  features {}
-  subscription_id = "65008410-3554-490e-8d48-54b2b065d97a"
-}
-
 module "eu-network" {
   source            = "../../modules/network-conf"
   resource_group    = "test-tech_task-wp01--rg_eu_west"
@@ -36,7 +21,7 @@ resource "azurerm_network_security_group" "nsg-admin" {
 
 module "azure-file-server" {
   source              = "../../modules/azure-file-server"
-  name                = "euwp1storagetest101"
+  name                = "euwp1storagetest102"
   location            = "westeurope"
   resource_group_name = module.eu-network.rgname
 }
